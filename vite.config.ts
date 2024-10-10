@@ -2,9 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import eslint from "vite-plugin-eslint";
-import child from "child_process";
-
-const commitHash = child.execSync("git rev-parse HEAD").toString().trim();
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
@@ -30,8 +27,8 @@ export default defineConfig(() => {
     // Workaround, see https://github.com/vitejs/vite/discussions/5912#discussioncomment-6115736
     define: {
       global: "globalThis",
-      'import.meta.env.VITE_GIT_COMMIT_HASH': JSON.stringify(commitHash),
-      'import.meta.env.VITE_APP_BUILD_DATE': JSON.stringify(new Date().toISOString()),
+      'import.meta.env.VITE_GIT_COMMIT_HASH': JSON.stringify(process.env.GIT_COMMIT || "unknown"),
+      'import.meta.env.VITE_APP_BUILD_DATE': JSON.stringify(process.env.BUILD_DATE || "unknown"),
     },
     test: {
       globals: true,
