@@ -4,7 +4,7 @@ FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /src
 COPY package.json .
 COPY package-lock.json .
-RUN npm i
+RUN npm ci
 COPY / .
 
 ARG PUBLIC_URL=/editor-ui
