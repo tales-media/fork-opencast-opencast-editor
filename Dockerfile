@@ -24,15 +24,15 @@ ARG GIT_COMMIT=unknown
 
 COPY --from=build /src/build "/www/${PUBLIC_URL}"
 
-LABEL maintainer                             "shio solutions GmbH <dev@shio.solutions>"
-LABEL org.opencontainers.image.title         "Opencast Video Editor"
-LABEL org.opencontainers.image.description   "Web-based video editor for Opencast"
-LABEL org.opencontainers.image.version       "${VERSION}"
-LABEL org.opencontainers.image.vendor        "shio solutions GmbH"
-LABEL org.opencontainers.image.authors       "shio solutions GmbH <dev@shio.solutions>"
-LABEL org.opencontainers.image.licenses      "Apache-2.0"
-LABEL org.opencontainers.image.url           "https://github.com/tales-media/fork-opencast-opencast-editor"
-LABEL org.opencontainers.image.documentation "https://github.com/tales-media/fork-opencast-opencast-editor"
-LABEL org.opencontainers.image.source        "https://github.com/tales-media/fork-opencast-opencast-editor"
-LABEL org.opencontainers.image.created       "${BUILD_DATE}"
-LABEL org.opencontainers.image.revision      "${GIT_COMMIT}"
+LABEL maintainer="shio solutions GmbH <dev@shio.solutions>" \
+      org.opencontainers.image.title="Opencast Video Editor" \
+      org.opencontainers.image.description="Web-based video editor for Opencast" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.vendor="shio solutions GmbH" \
+      org.opencontainers.image.authors="shio solutions GmbH <dev@shio.solutions>" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.url="https://github.com/tales-media/fork-opencast-opencast-editor" \
+      org.opencontainers.image.documentation="https://github.com/tales-media/fork-opencast-opencast-editor" \
+      org.opencontainers.image.source="https://github.com/tales-media/fork-opencast-opencast-editor" \
+      org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.revision="${GIT_COMMIT}"
