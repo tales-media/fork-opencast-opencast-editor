@@ -5,10 +5,12 @@ import {
   backOrContinueStyle,
 } from "../cssStyles";
 
-import { LuChevronLeft, LuMoreHorizontal } from "react-icons/lu";
+import { LuChevronLeft, LuMoveHorizontal } from "react-icons/lu";
 
 import { useAppSelector } from "../redux/store";
+
 import { PageButton } from "./Finish";
+
 import { useTranslation } from "react-i18next";
 import { ErrorBox } from "@opencast/appkit";
 import { selectError, selectStatus } from "../redux/workflowPostSlice";
@@ -35,7 +37,7 @@ const WorkflowConfiguration: React.FC = () => {
   return (
     <div css={workflowConfigurationStyle}>
       <h2>{t("workflowConfig.headline-text")}</h2>
-      <LuMoreHorizontal css={{ fontSize: 80 }} />
+      <LuMoveHorizontal css={{ fontSize: 80 }} />
       Placeholder
       <div>{t("workflowConfig.satisfied-text")}</div>
       <div css={backOrContinueStyle}>

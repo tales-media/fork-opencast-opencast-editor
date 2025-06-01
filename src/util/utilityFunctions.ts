@@ -182,7 +182,7 @@ export default function useWindowDimensions() {
 // Runs a callback every delay milliseconds
 // Pass delay = null to stop
 // Based off: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-type IntervalFunction = () => (unknown | void);
+type IntervalFunction = () => (unknown);
 export function useInterval(callback: IntervalFunction, delay: number | null) {
 
   const savedCallback = useRef<IntervalFunction | null>(null);
@@ -202,12 +202,4 @@ export function useInterval(callback: IntervalFunction, delay: number | null) {
       return () => { clearInterval(id); };
     }
   }, [callback, delay]);
-}
-
-// Returns true if the given index is out of bounds on the given array
-export function outOfBounds(array: unknown[], index: number) {
-  if (index >= array.length) {
-    return true;
-  }
-  return false;
 }

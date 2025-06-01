@@ -6,11 +6,10 @@ import {
   navigationButtonStyle,
 } from "../cssStyles";
 
-import { LuCheckCircle, LuAlertCircle, LuChevronLeft, LuSave, LuCheck } from "react-icons/lu";
+import { LuCircleCheck, LuCircleAlert, LuChevronLeft, LuSave, LuCheck } from "react-icons/lu";
 
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import {
-  selectCustomizedTrackSelection,
   selectHasChanges,
   selectSegments,
   selectSelectedWorkflowId,
@@ -67,7 +66,7 @@ const Save: React.FC = () => {
       && !hasChanges && !metadataHasChanges && !subtitleHasChanges) {
       return (
         <>
-          <LuCheckCircle css={{ fontSize: 80 }} />
+          <LuCircleCheck css={{ fontSize: 80 }} />
           <div>{t("save.success-text")}</div>
           <CallbackButton />
         </>
@@ -123,7 +122,6 @@ export const SaveButton: React.FC<{
 
   const segments = useAppSelector(selectSegments);
   const tracks = useAppSelector(selectTracks);
-  const customizedTrackSelection = useAppSelector(selectCustomizedTrackSelection);
   const subtitles = useAppSelector(selectSubtitles);
   const metadata = useAppSelector(selectCatalogs);
   const selectedWorkflowId = useAppSelector(selectSelectedWorkflowId);
@@ -135,7 +133,7 @@ export const SaveButton: React.FC<{
   const Icon = () => {
     if (workflowStatus === "failed") {
       tooltip = t("save.confirmButton-failed-tooltip");
-      return <LuAlertCircle />;
+      return <LuCircleAlert />;
     } else if (workflowStatus === "success") {
       tooltip = t("save.confirmButton-success-tooltip");
       return <LuCheck />;
@@ -164,7 +162,6 @@ export const SaveButton: React.FC<{
     dispatch(postVideoInformation({
       segments: segments,
       tracks: tracks,
-      customizedTrackSelection,
       subtitles: prepareSubtitles(),
       metadata: metadata,
       workflow: selectedWorkflowId ? [{ id: selectedWorkflowId }] : undefined,
@@ -181,6 +178,7 @@ export const SaveButton: React.FC<{
       dispatch(metadataSetHasChanges(false));
       dispatch(subtitleSetHasChanges(false));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, workflowStatus]);
 
   return (
