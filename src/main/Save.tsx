@@ -112,9 +112,11 @@ const Save: React.FC = () => {
 export const SaveButton: React.FC<{
   text?: string
   isTransitionToEnd?: boolean
+  startWorkflow?: boolean
 }> = ({
   text,
   isTransitionToEnd = false,
+  startWorkflow = false,
 }) => {
   const { t } = useTranslation();
 
@@ -167,7 +169,7 @@ export const SaveButton: React.FC<{
       customizedTrackSelection,
       subtitles: prepareSubtitles(),
       metadata: metadata,
-      workflow: selectedWorkflowId ? [{ id: selectedWorkflowId }] : undefined,
+      workflow: startWorkflow && selectedWorkflowId ? [{ id: selectedWorkflowId }] : undefined,
     }));
   };
 
