@@ -268,7 +268,7 @@ const validate = (obj: Record<string, any> | null, allowParse: boolean, src: str
       return newValue === undefined ? value : newValue;
     } catch (e) {
       console.warn(
-        `Validation of setting "${path}" (${sourceDescription}) with value "${value}" failed: `
+        `Validation of setting "${path}" (${sourceDescription}) with value "${JSON.stringify(value)}" failed: `
         + `${e}. Ignoring.`,
       );
       return null;

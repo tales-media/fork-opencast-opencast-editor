@@ -297,7 +297,7 @@ const UploadButton: React.FC<{
     reader.onload = e => {
       if (e.target && (e.target.result || e.target.result === "")) {
         try {
-          const text = e.target.result.toString();
+          const text = e.target.result as string; // We know this must be string because we use "readAsText"
           const subtitleParsed = parseSubtitle(text);
           dispatch(setSubtitle({
             identifier: selectedId,

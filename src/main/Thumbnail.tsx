@@ -91,7 +91,7 @@ const Thumbnail: React.FC = () => {
     reader.onload = e => {
       // the result image data
       if (e.target && e.target.result) {
-        const uri = e.target.result.toString();
+        const uri = e.target.result as string; // We know this must be string because we use "readAsDataURL"
         dispatch(setThumbnail({ id: track.id, uri: uri }));
         dispatch(setHasChanges(true));
       }

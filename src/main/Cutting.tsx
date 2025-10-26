@@ -18,6 +18,7 @@ import {
   setIsPlayPreview,
   jumpToPreviousSegment,
   jumpToNextSegment,
+  selectVideos,
 } from "../redux/videoSlice";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../redux/store";
@@ -41,6 +42,7 @@ const Cutting: React.FC = () => {
     state.videoState.status);
   const error = useAppSelector((state: { videoState: { error: httpRequestState["error"]; }; }) =>
     state.videoState.error);
+  const videos = useAppSelector(selectVideos);
   const duration = useAppSelector(selectDuration);
   const theme = useTheme();
   const errorReason = useAppSelector((state: { videoState: { errorReason: httpRequestState["errorReason"]; }; }) =>
@@ -66,6 +68,14 @@ const Cutting: React.FC = () => {
         }));
       }
     } else if (videoURLStatus === "success") {
+      // Editor can not handle events with no videos/audio-only atm
+      if (videos === null || videos.length === 0) {
+        dispatch(setError({
+          error: true,
+          errorMessage: t("video.noVideoError-text"),
+          errorDetails: error,
+        }));
+      }
       if (duration === null) {
         dispatch(setError({
           error: true,
@@ -74,7 +84,7 @@ const Cutting: React.FC = () => {
         }));
       }
     }
-  }, [videoURLStatus, dispatch, error, t, errorReason, duration]);
+  }, [videoURLStatus, dispatch, error, t, errorReason, duration, videos]);
 
   // Style
   const cuttingStyle = css({
@@ -89,7 +99,7 @@ const Cutting: React.FC = () => {
   return (
     <div css={cuttingStyle}>
       <CuttingHeader />
-      <VideoPlayers refs={undefined} />
+      <VideoPlayers maxHeightInPixel={500} />
       <div css={videosStyle(theme)}>
         <Timeline
           timelineHeight={260}
